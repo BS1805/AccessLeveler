@@ -1,4 +1,4 @@
-﻿using AccessLeveler.Models.Application_Models;
+﻿using AccessLeveler.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace AccessLeveler.Data;

@@ -1,4 +1,4 @@
-﻿namespace AccessLeveler.Models.Application_Models;
+﻿namespace AccessLeveler.Models;
 public class RolePermission
 {
     public Guid RoleId { get; set; }  

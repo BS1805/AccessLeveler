@@ -1,4 +1,4 @@
-﻿namespace AccessLeveler.Repositories;
+﻿namespace AccessLeveler.Services;
 
 public interface IGenericRepository<T> where T : class
 {

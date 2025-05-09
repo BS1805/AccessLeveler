@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AccessLeveler.Repositories;
+namespace AccessLeveler.Services;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {

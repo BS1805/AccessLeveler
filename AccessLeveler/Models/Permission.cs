@@ -1,4 +1,4 @@
-﻿namespace AccessLeveler.Models.Application_Models;
+﻿namespace AccessLeveler.Models;
 public class Permission
 {
     public Guid Id { get; set; } 

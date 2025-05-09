@@ -1,4 +1,4 @@
-﻿using AccessLeveler.Models.Application_Models;
+﻿using AccessLeveler.Models;
 
 namespace AccessLeveler.Services;
 
