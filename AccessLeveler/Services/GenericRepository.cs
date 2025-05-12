@@ -1,6 +1,7 @@
 ﻿using AccessLeveler.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AccessLeveler.Services;
@@ -21,7 +22,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _dbSet.ToListAsync();
     }
 
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T?> GetByIdAsync(Guid id) 
     {
         return await _dbSet.FindAsync(id);
     }
@@ -38,7 +39,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Guid id) 
     {
         var entity = await _dbSet.FindAsync(id);
         if (entity != null)
@@ -46,5 +47,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
+    }
+
+    public async Task<bool> ExistsAsync(Guid id)
+    {
+        return await _dbSet.FindAsync(id) != null;
+    }
+
+    public IQueryable<T> Queryable() 
+    {
+        return _dbSet.AsQueryable();
     }
 }

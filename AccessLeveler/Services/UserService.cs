@@ -1,7 +1,8 @@
 ﻿using AccessLeveler.Models;
-using AccessLeveler.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+
+namespace AccessLeveler.Services;
 
 public class UserService : IUserService
 {
@@ -12,12 +13,12 @@ public class UserService : IUserService
         _userManager = userManager;
     }
 
-    public async Task<ApplicationUser> GetUserByIdAsync(string userId)
+    public async Task<ApplicationUser?> GetUserByIdAsync(string userId) 
     {
         return await _userManager.FindByIdAsync(userId);
     }
 
-    public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+    public async Task<ApplicationUser?> GetUserByEmailAsync(string email) 
     {
         return await _userManager.FindByEmailAsync(email);
     }

@@ -37,8 +37,7 @@ public class SeedRolesAndPermissions
 
         context.SaveChanges();
 
-       
-        AssignPermissionsToRoles(roleManager, context);
+               AssignPermissionsToRoles(roleManager, context);
     }
 
     private static void AssignPermissionsToRoles(RoleManager<ApplicationRole> roleManager, ApplicationDbContext context)
@@ -49,44 +48,58 @@ public class SeedRolesAndPermissions
 
         var permissions = context.Permissions.ToList();
 
-        foreach (var permission in permissions)
+        if (adminRole != null)
         {
-            if (!context.RolePermissions.Any(rp => rp.RoleId == adminRole.Id && rp.PermissionId == permission.Id))
+            foreach (var permission in permissions)
             {
-                context.RolePermissions.Add(new RolePermission
+                if (!context.RolePermissions.Any(rp => rp.RoleId == adminRole.Id && rp.PermissionId == permission.Id))
                 {
-                    RoleId = adminRole.Id,
-                    PermissionId = permission.Id
-                });
+                    context.RolePermissions.Add(new RolePermission
+                    {
+                        RoleId = adminRole.Id,
+                        PermissionId = permission.Id,
+                        Role = adminRole,
+                        Permission = permission
+                    });
+                }
             }
         }
 
-    
-        foreach (var permission in permissions.Where(p => p.PermissionName != "ViewAdminModule"))
+        if (therapistRole != null)
         {
-            if (!context.RolePermissions.Any(rp => rp.RoleId == therapistRole.Id && rp.PermissionId == permission.Id))
+            foreach (var permission in permissions.Where(p => p.PermissionName != "ViewAdminModule"))
             {
-                context.RolePermissions.Add(new RolePermission
+                if (!context.RolePermissions.Any(rp => rp.RoleId == therapistRole.Id && rp.PermissionId == permission.Id))
                 {
-                    RoleId = therapistRole.Id,
-                    PermissionId = permission.Id
-                });
+                    context.RolePermissions.Add(new RolePermission
+                    {
+                        RoleId = therapistRole.Id,
+                        PermissionId = permission.Id,
+                        Role = therapistRole,
+                        Permission = permission
+                    });
+                }
             }
         }
 
-       
-        foreach (var permission in permissions.Where(p => p.PermissionName == "ViewClientModule"))
+        if (clientRole != null)
         {
-            if (!context.RolePermissions.Any(rp => rp.RoleId == clientRole.Id && rp.PermissionId == permission.Id))
+            foreach (var permission in permissions.Where(p => p.PermissionName == "ViewClientModule"))
             {
-                context.RolePermissions.Add(new RolePermission
+                if (!context.RolePermissions.Any(rp => rp.RoleId == clientRole.Id && rp.PermissionId == permission.Id))
                 {
-                    RoleId = clientRole.Id,
-                    PermissionId = permission.Id
-                });
+                    context.RolePermissions.Add(new RolePermission
+                    {
+                        RoleId = clientRole.Id,
+                        PermissionId = permission.Id,
+                        Role = clientRole,
+                        Permission = permission
+                    });
+                }
             }
         }
 
         context.SaveChanges();
     }
+
 }
